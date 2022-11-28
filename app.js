@@ -1,4 +1,4 @@
-
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/blogDB")
+mongoose.connect("mongodb+srv://admin-naresh:9mQAm1ma0VBgmT33@cluster0.nrpd5rt.mongodb.net/blogDB")
 
 const postSchema = new mongoose.Schema({
   title : String,
@@ -73,6 +73,8 @@ app.get("/posts/:postId", function(req, res){
   });
 });
 
-app.listen(3000, function() {
+var port = process.env.PORT || 3000;
+
+app.listen(port, function() {
   console.log("Server started on port 3000");
 });
